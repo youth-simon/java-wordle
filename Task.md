@@ -42,31 +42,8 @@
         - [] 모든 칸들을 회색으로 출력한다.
         - [] 부분 일치 먼저, 노란색으로 출력한다.
         - [] 이후 완전 일치를 초록색으로 출력한다.
- 
-
-
 
 
 ## 구상도
 
 ![구상도](img.png)
-
-
-
--    - a(String a, String b) {
-    - a.charAt(0) = b.charAt(0)
-    - [G]
-- }
-
-    - Map GG000
-        -   YYY00
-        - YYY00
-        - YYY00
-        - YYY00
-        - GGY00
-        -
-            - apple <- a:1 p:2 l:1 e:1
-            - map.contains(a)
-            - 입력 llltt
-            - 정답 aaall
-              - 
