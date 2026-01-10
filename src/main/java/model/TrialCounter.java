@@ -1,13 +1,17 @@
 package model;
 
 public class TrialCounter {
-    private int trials;
+    private int trials = 0;
 
-    private void increment() {
+    public void increment() {
         trials++;
     }
 
-    private boolean failCheck() {
+    public boolean failCheck() {
         return trials > 6;
+    }
+
+    public int getTrials() {
+        return trials;
     }
 }
