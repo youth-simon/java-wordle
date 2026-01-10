@@ -19,7 +19,7 @@ public class WordInputHandler {
             String input = new Scanner(System.in).nextLine();
             try {
                 inputSuccess = validateInput(input);
-                return input;
+                return input.toLowerCase();
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
