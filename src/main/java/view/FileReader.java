@@ -32,9 +32,8 @@ public class FileReader {
             throw new RuntimeException(e);
         }
     }
-        private static Long getTodayWordIndex () {
 
-            return ChronoUnit.DAYS.between(LocalDateTime.of(2021, 6, 19, 0, 0), LocalDateTime.now()) % WORDBOOK_SIZE;
-        }
-
+    private static Long getTodayWordIndex () {
+        return ChronoUnit.DAYS.between(LocalDateTime.of(2021, 6, 19, 0, 0), LocalDateTime.now()) % WORDBOOK_SIZE;
+    }
 }

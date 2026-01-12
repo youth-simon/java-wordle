@@ -1,27 +1,27 @@
 package view;
 
-import model.TrialCounter;
-
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
 
 public class WordDrawer {
 
-    static List<char[]> list = new ArrayList<>();
-
+    static List<String[]> list = new ArrayList<>();
+    static final String WHITE= "⬜";
+    static final String YELLOW = "🟨";
+    static final String GREEN = "🟩";
 
     public static void draw(List<Integer> partialMatchedIndexes, List<Integer> perfectlyMatchedIndexes) {
 
-        char[] result = new char[5];
-        Arrays.fill(result, 'B');
+        String[] result = new String[5];
+        Arrays.fill(result, WHITE);
 
         for (int partialMatchedIndex : partialMatchedIndexes) {
-            result[partialMatchedIndex] = 'Y';
+            result[partialMatchedIndex] = YELLOW;
         }
 
         for (int perfectlyMatchedIndex : perfectlyMatchedIndexes) {
-            result[perfectlyMatchedIndex] = 'G';
+            result[perfectlyMatchedIndex] = GREEN;
         }
 
         list.add(result);
@@ -31,8 +31,8 @@ public class WordDrawer {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < trials; i++) {
-            for (char c : list.get(i)) {
-                sb.append(c);
+            for (String s : list.get(i)) {
+                sb.append(s);
             }
             sb.append("\n");
         }

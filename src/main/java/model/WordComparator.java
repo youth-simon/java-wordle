@@ -32,8 +32,13 @@ public class WordComparator {
 
         for (int i = 0; i < inputWord.length(); i++) {
             if (map.containsKey(inputWord.charAt(i))) {
+
                 list.add(i);
                 map.put(inputWord.charAt(i), map.get(inputWord.charAt(i)) - 1);
+
+                if (map.get(inputWord.charAt(i)) == 0) {
+                    map.remove(inputWord.charAt(i));
+                }
             }
         }
 
