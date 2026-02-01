@@ -3,16 +3,14 @@ import model.TrialCounter;
 import model.WordComparator;
 import view.FileReader;
 import view.WordDrawer;
-
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 
 public class Application {
     public static void main(String[] args) throws IOException {
         // 1) FileReader 오늘의 단어 뽑기
         FileReader fileReader = new FileReader();
-        String todayWord =  fileReader.read(Path.of("./words.txt"));
+        String todayWord =  fileReader.read("./words.txt");
 
         // 2) WordInputHandler - prompt + 단어 받기
         TrialCounter trialCounter = new TrialCounter();
