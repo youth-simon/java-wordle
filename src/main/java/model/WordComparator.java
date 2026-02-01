@@ -7,9 +7,9 @@ import java.util.HashMap;
 
 public class WordComparator {
 
-    Map<Character, Integer> map = new HashMap<>();
 
-    public List<Integer> getPerfectMathcedIndex(String inputWord, String todayWord) {
+
+    public List<Integer> getPerfectMatchedIndex(String inputWord, String todayWord) {
 
         List<Integer> list = new ArrayList<>();
 
@@ -24,24 +24,29 @@ public class WordComparator {
 
     public List<Integer> getPartialMatchedIndex(String inputWord, String todayWord) {
 
+        Map<Character, Integer> todayWordMap = new HashMap<>();
         List<Integer> list = new ArrayList<>();
 
         for (char c : todayWord.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
+            todayWordMap.put(c, todayWordMap.getOrDefault(c, 0) + 1);
         }
 
         for (int i = 0; i < inputWord.length(); i++) {
-            if (map.containsKey(inputWord.charAt(i))) {
+            if (todayWordMap.containsKey(inputWord.charAt(i))) {
 
                 list.add(i);
-                map.put(inputWord.charAt(i), map.get(inputWord.charAt(i)) - 1);
+                todayWordMap.put(inputWord.charAt(i), todayWordMap.get(inputWord.charAt(i)) - 1);
 
-                if (map.get(inputWord.charAt(i)) == 0) {
-                    map.remove(inputWord.charAt(i));
-                }
+                clearMap(todayWordMap, inputWord.charAt(i));
             }
         }
 
         return list;
+    }
+
+    private void clearMap(Map<Character, Integer> todayWordMap, char key) {
+        if (todayWordMap.get(key) == 0) {
+            todayWordMap.remove(key);
+        }
     }
 }
