@@ -3,25 +3,23 @@ package view;
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
+import model.TileColor;
 
 public class WordDrawer {
 
     static List<String[]> list = new ArrayList<>();
-    static final String WHITE= "⬜";
-    static final String YELLOW = "🟨";
-    static final String GREEN = "🟩";
 
     public static void draw(List<Integer> partialMatchedIndexes, List<Integer> perfectlyMatchedIndexes) {
 
         String[] result = new String[5];
-        Arrays.fill(result, WHITE);
+        Arrays.fill(result, TileColor.WHITE.getEmoji());
 
         for (int partialMatchedIndex : partialMatchedIndexes) {
-            result[partialMatchedIndex] = YELLOW;
+            result[partialMatchedIndex] = TileColor.YELLOW.getEmoji();
         }
 
         for (int perfectlyMatchedIndex : perfectlyMatchedIndexes) {
-            result[perfectlyMatchedIndex] = GREEN;
+            result[perfectlyMatchedIndex] = TileColor.GREEN.getEmoji();
         }
 
         list.add(result);
