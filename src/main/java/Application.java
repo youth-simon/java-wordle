@@ -19,6 +19,7 @@ public class Application {
         WordComparator wordComparator = new WordComparator();
 
         while (trialCounter.keepTrying()){
+            System.out.println("정답을 입력해 주세요.");
             String input = inputHandler.inputWord();
             trialCounter.increment();
 
