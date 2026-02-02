@@ -9,7 +9,7 @@ public class WordComparator {
 
     Map<Character, Integer> map = new HashMap<>();
 
-    public List<Integer> getPerfectMathcedIndex(String inputWord, String todayWord) {
+    public List<Integer> getPerfectMatchedIndex(String inputWord, String todayWord) {
 
         List<Integer> list = new ArrayList<>();
 
