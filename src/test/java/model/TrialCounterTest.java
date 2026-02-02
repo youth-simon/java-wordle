@@ -1,13 +1,18 @@
 package model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TrialCounterTest {
+    TrialCounter trialCounter;
+
+    @BeforeEach
+    void setUp() {
+        trialCounter = new TrialCounter();
+    }
 
     @Test
     @DisplayName("increment 는 trials가 1 증가한다.")
