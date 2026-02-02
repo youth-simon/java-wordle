@@ -14,8 +14,8 @@ class WordComparatorTest {
     void fullyMatch_getPerfectMatchedIndex() {
         WordComparator wordComparator = new WordComparator();
 
-        List<Integer> perfect1 = wordComparator.getPerfectMatchedIndex("apple", "apple");
-        assertEquals(perfect1, List.of(0,1,2,3,4));
+        List<Integer> perfect = wordComparator.getPerfectMatchedIndex("apple", "apple");
+        assertEquals(perfect, List.of(0,1,2,3,4));
     }
 
     @Test
@@ -23,8 +23,8 @@ class WordComparatorTest {
     void partialMatch_getPerfectMatchedIndex() {
         WordComparator wordComparator = new WordComparator();
 
-        List<Integer> partial1 = wordComparator.getPerfectMatchedIndex("appkk", "apple");
-        assertEquals(partial1, List.of(0,1,2));
+        List<Integer> partial = wordComparator.getPerfectMatchedIndex("appkk", "apple");
+        assertEquals(partial, List.of(0,1,2));
     }
 
     @Test
@@ -32,8 +32,8 @@ class WordComparatorTest {
     void noMatch_getPerfectMatchedIndex() {
         WordComparator wordComparator = new WordComparator();
 
-        List<Integer> noMatch1 = wordComparator.getPerfectMatchedIndex("kkkkk", "apple");
-        assertEquals(noMatch1, List.of());
+        List<Integer> noMatch = wordComparator.getPerfectMatchedIndex("kkkkk", "apple");
+        assertEquals(noMatch, List.of());
     }
 
     @Test
@@ -41,8 +41,8 @@ class WordComparatorTest {
     void fullyMatch_getPartialMatchedIndex() {
         WordComparator wordComparator = new WordComparator();
 
-        List<Integer> perfect1 = wordComparator.getPartialMatchedIndex("leapp", "apple");
-        assertEquals(perfect1, List.of(0,1,2,3,4));
+        List<Integer> perfect = wordComparator.getPartialMatchedIndex("leapp", "apple");
+        assertEquals(perfect, List.of(0,1,2,3,4));
     }
 
     @Test
@@ -50,8 +50,8 @@ class WordComparatorTest {
     void partialMatch_getPartialMatchedIndex() {
         WordComparator wordComparator = new WordComparator();
 
-        List<Integer> partial1 = wordComparator.getPartialMatchedIndex("kkkpp", "apple");
-        assertEquals(partial1, List.of(3,4));
+        List<Integer> partial = wordComparator.getPartialMatchedIndex("kkkpp", "apple");
+        assertEquals(partial, List.of(3,4));
     }
 
     @Test
@@ -59,7 +59,7 @@ class WordComparatorTest {
     void noMatch_getPartialMatchedIndex() {
         WordComparator wordComparator = new WordComparator();
 
-        List<Integer> noMatch1 = wordComparator.getPartialMatchedIndex("kkkkk", "apple");
-        assertEquals(noMatch1, List.of());
+        List<Integer> noMatch = wordComparator.getPartialMatchedIndex("kkkkk", "apple");
+        assertEquals(noMatch, List.of());
     }
 }
