@@ -42,9 +42,9 @@ public class WordDrawer {
 
     public static void showTheEnd(boolean gameOver, int trials) {
         if (gameOver) {
-            System.out.println(trials + "Times tried, You won: The End");
+            System.out.println(trials + "번 만에 성공! 게임 종료");
         } else {
-            System.out.println("You lost: The End");
+            System.out.println("실패! 게임 종료");
         }
     }
 }

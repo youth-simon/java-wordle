@@ -18,10 +18,10 @@ public class WordInputHandler {
 
     private void validateInput(String input) {
         if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException("Empty input");
+            throw new IllegalArgumentException("입력값이 비어있습니다.");
         }
         if (input.length() != 5) {
-            throw new IllegalArgumentException("Not five characters long");
+            throw new IllegalArgumentException("5글자를 입력해주세요.");
         }
     }
 }
