@@ -1,8 +1,10 @@
 import controller.WordInputHandler;
 import model.TrialCounter;
 import model.WordComparator;
+import model.WordResult;
 import view.FileReader;
 import view.WordDrawer;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -10,14 +12,14 @@ public class Application {
     public static void main(String[] args) throws IOException {
         // 1) FileReader 오늘의 단어 뽑기
         FileReader fileReader = new FileReader();
-        String todayWord =  fileReader.read("./words.txt");
+        String todayWord = fileReader.read("./words.txt");
 
         // 2) WordInputHandler - prompt + 단어 받기
         TrialCounter trialCounter = new TrialCounter();
         WordInputHandler inputHandler = new WordInputHandler();
         WordComparator wordComparator = new WordComparator();
 
-        while (trialCounter.keepTrying()){
+        while (trialCounter.keepTrying()) {
             System.out.println("정답을 입력해 주세요.");
             String input = inputHandler.inputWord();
             trialCounter.increment();
@@ -29,8 +31,10 @@ public class Application {
                 trialCounter.gameOver();
             }
 
-            WordDrawer.draw(partialMatchedIndexes, perfectlyMatchedIndexes);
-            WordDrawer.showPrompt(trialCounter.getTrials());
+            WordResult result = new WordResult(5, partialMatchedIndexes, perfectlyMatchedIndexes);
+            WordDrawer drawer = new WordDrawer();
+            drawer.addResult(result);
+            drawer.showPrompt();
         }
 
         WordDrawer.showTheEnd(trialCounter.isGameOver());

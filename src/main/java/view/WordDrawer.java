@@ -1,40 +1,26 @@
 package view;
 
-import java.util.List;
-import java.util.Arrays;
+import model.WordResult;
+
 import java.util.ArrayList;
-import model.TileColor;
+import java.util.List;
 
 public class WordDrawer {
 
-    static List<String[]> list = new ArrayList<>();
+    private final List<WordResult> history = new ArrayList<>();
 
-    public static void draw(List<Integer> partialMatchedIndexes, List<Integer> perfectlyMatchedIndexes) {
-
-        String[] result = new String[5];
-        Arrays.fill(result, TileColor.WHITE.getEmoji());
-
-        for (int partialMatchedIndex : partialMatchedIndexes) {
-            result[partialMatchedIndex] = TileColor.YELLOW.getEmoji();
-        }
-
-        for (int perfectlyMatchedIndex : perfectlyMatchedIndexes) {
-            result[perfectlyMatchedIndex] = TileColor.GREEN.getEmoji();
-        }
-
-        list.add(result);
+    public void addResult(WordResult result) {
+        history.add(result);
     }
 
-    public static void showPrompt(int trials) {
-
+    public void showPrompt() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < trials; i++) {
-            for (String s : list.get(i)) {
+        for (WordResult result : history) {
+            for (String s : result.getTiles()) {
                 sb.append(s);
             }
             sb.append("\n");
         }
-
         System.out.println(sb);
     }
 
