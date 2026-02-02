@@ -4,12 +4,11 @@ import model.WordComparator;
 import view.FileReader;
 import view.WordDrawer;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
 public class Application {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // 1) FileReader 오늘의 단어 뽑기
         FileReader fileReader = new FileReader();
         String todayWord =  fileReader.read(Path.of("./words.txt"));
