@@ -24,7 +24,7 @@ public class Application {
             trialCounter.increment();
 
             List<Integer> partialMatchedIndexes = wordComparator.getPartialMatchedIndex(input, todayWord);
-            List<Integer> perfectlyMatchedIndexes = wordComparator.getPerfectMathcedIndex(input, todayWord);
+            List<Integer> perfectlyMatchedIndexes = wordComparator.getPerfectMatchedIndex(input, todayWord);
 
             if (perfectlyMatchedIndexes.size() == 5) {
                 trialCounter.gameOver();

@@ -10,29 +10,29 @@ import static org.junit.jupiter.api.Assertions.*;
 class WordComparatorTest {
 
     @Test
-    @DisplayName("getPerfectMathcedIndex()에서 모든 글자가 일치할 경우 단어의 전체 인덱스를 반환한다.")
-    void fullyMatch_getPerfectMathcedIndex() {
+    @DisplayName("getPerfectMatchedIndex()에서 모든 글자가 일치할 경우 단어의 전체 인덱스를 반환한다.")
+    void fullyMatch_getPerfectMatchedIndex() {
         WordComparator wordComparator = new WordComparator();
 
-        List<Integer> perfect1 = wordComparator.getPerfectMathcedIndex("apple", "apple");
+        List<Integer> perfect1 = wordComparator.getPerfectMatchedIndex("apple", "apple");
         assertEquals(perfect1, List.of(0,1,2,3,4));
     }
 
     @Test
-    @DisplayName("getPerfectMathcedIndex()에서 특정 글자가 완전일치할 경우 완전일치하는 글자 인덱스만 반환한다.")
-    void partialMatch_getPerfectMathcedIndex() {
+    @DisplayName("getPerfectMatchedIndex()에서 특정 글자가 완전일치할 경우 완전일치하는 글자 인덱스만 반환한다.")
+    void partialMatch_getPerfectMatchedIndex() {
         WordComparator wordComparator = new WordComparator();
 
-        List<Integer> partial1 = wordComparator.getPerfectMathcedIndex("appkk", "apple");
+        List<Integer> partial1 = wordComparator.getPerfectMatchedIndex("appkk", "apple");
         assertEquals(partial1, List.of(0,1,2));
     }
 
     @Test
-    @DisplayName("getPerfectMathcedIndex()에서 완전일치하는 글자가 없을때는 빈 리스트를 반환한다.")
-    void noMatch_getPerfectMathcedIndex() {
+    @DisplayName("getPerfectMatchedIndex()에서 완전일치하는 글자가 없을때는 빈 리스트를 반환한다.")
+    void noMatch_getPerfectMatchedIndex() {
         WordComparator wordComparator = new WordComparator();
 
-        List<Integer> noMatch1 = wordComparator.getPerfectMathcedIndex("kkkkk", "apple");
+        List<Integer> noMatch1 = wordComparator.getPerfectMatchedIndex("kkkkk", "apple");
         assertEquals(noMatch1, List.of());
     }
 
