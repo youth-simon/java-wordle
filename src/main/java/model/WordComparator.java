@@ -1,13 +1,11 @@
 package model;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class WordComparator {
-
-
 
     public List<Integer> getPerfectMatchedIndex(String inputWord, String todayWord) {
 
@@ -31,9 +29,12 @@ public class WordComparator {
             todayWordMap.put(c, todayWordMap.getOrDefault(c, 0) + 1);
         }
 
-        for (int i = 0; i < inputWord.length(); i++) {
-            if (todayWordMap.containsKey(inputWord.charAt(i))) {
+        List<Integer> perfectMatchedIndexes = getPerfectMatchedIndex(inputWord, todayWord);
 
+        for (int i = 0; i < inputWord.length(); i++) {
+            if (perfectMatchedIndexes.contains(i)) continue;
+
+            if (todayWordMap.containsKey(inputWord.charAt(i))) {
                 list.add(i);
                 todayWordMap.put(inputWord.charAt(i), todayWordMap.get(inputWord.charAt(i)) - 1);
 
