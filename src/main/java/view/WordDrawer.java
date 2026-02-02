@@ -41,9 +41,8 @@ public class WordDrawer {
     public static void showTheEnd(boolean gameOver) {
         if (gameOver) {
             System.out.println("You won: The End");
-        } else {
-            System.out.println("You lost: The End");
+            return;
         }
-
+        System.out.println("You lost: The End");
     }
 }
