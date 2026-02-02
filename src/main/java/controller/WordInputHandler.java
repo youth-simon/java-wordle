@@ -5,27 +5,23 @@ import java.util.Scanner;
 public class WordInputHandler {
 
     public String inputWord() {
-        boolean inputSuccess = false;
-        while (!inputSuccess) {
-            String input = new Scanner(System.in).nextLine();
+        while (true) {
+            String input = new Scanner(System.in).nextLine().toLowerCase();
             try {
-                inputSuccess = validateInput(input);
-                return input.toLowerCase();
+                validateInput(input);
+                return input;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-
-        return "";
     }
 
-    private boolean validateInput(String input) {
+    private void validateInput(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("Empty input");
         }
-        if (input.length() > 5) {
-            throw new IllegalArgumentException("Too Long input");
+        if (input.length() != 5) {
+            throw new IllegalArgumentException("Not five characters long");
         }
-        return true;
     }
 }

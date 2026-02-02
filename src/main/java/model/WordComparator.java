@@ -31,14 +31,15 @@ public class WordComparator {
         }
 
         for (int i = 0; i < inputWord.length(); i++) {
-            if (map.containsKey(inputWord.charAt(i))) {
-
-                list.add(i);
-                map.put(inputWord.charAt(i), map.get(inputWord.charAt(i)) - 1);
-
-                if (map.get(inputWord.charAt(i)) == 0) {
-                    map.remove(inputWord.charAt(i));
-                }
+            if (!map.containsKey(inputWord.charAt(i))) {
+                continue;
+            }
+            list.add(i);
+            int count = map.get(inputWord.charAt(i)) - 1;
+            if (count == 0) {
+                map.remove(inputWord.charAt(i));
+            } else {
+                map.put(inputWord.charAt(i), count);
             }
         }
 
