@@ -4,15 +4,6 @@ import java.util.Scanner;
 
 public class WordInputHandler {
 
-    private boolean validateInput(String input) {
-        if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException("Empty input");
-        }
-        if (input.length() > 5) {
-            throw new IllegalArgumentException("Too Long input");
-        }
-        return true;
-    }
     public String inputWord() {
         boolean inputSuccess = false;
         while (!inputSuccess) {
@@ -26,5 +17,15 @@ public class WordInputHandler {
         }
 
         return "";
+    }
+
+    private boolean validateInput(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new IllegalArgumentException("Empty input");
+        }
+        if (input.length() > 5) {
+            throw new IllegalArgumentException("Too Long input");
+        }
+        return true;
     }
 }
