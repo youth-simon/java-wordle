@@ -40,12 +40,11 @@ public class WordDrawer {
         System.out.println(sb);
     }
 
-    public static void showTheEnd(boolean gameOver) {
+    public static void showTheEnd(boolean gameOver, int trials) {
         if (gameOver) {
-            System.out.println("You won: The End");
+            System.out.println(trials + "Times tried, You won: The End");
         } else {
             System.out.println("You lost: The End");
         }
-
     }
 }
