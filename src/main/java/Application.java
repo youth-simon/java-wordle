@@ -19,6 +19,8 @@ public class Application {
         WordInputHandler inputHandler = new WordInputHandler();
         WordComparator wordComparator = new WordComparator();
 
+        WordDrawer drawer = new WordDrawer();
+
         while (trialCounter.keepTrying()) {
             System.out.println("정답을 입력해 주세요.");
             String input = inputHandler.inputWord();
@@ -32,7 +34,6 @@ public class Application {
             }
 
             WordResult result = new WordResult(5, partialMatchedIndexes, perfectlyMatchedIndexes);
-            WordDrawer drawer = new WordDrawer();
             drawer.addResult(result);
             drawer.showPrompt();
         }
