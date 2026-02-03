@@ -3,41 +3,96 @@ package model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class TrialCounterTest {
 
     @Test
-    @DisplayName("increment 는 trials가 1 증가한다.")
-    void increment() {
-        TrialCounter trialCounter = new TrialCounter();
+    @DisplayName("increment를 한 번 호출하면 trials는 1이다")
+    void incrementOnce() {
+        //given
+        final TrialCounter trialCounter = new TrialCounter();
 
+        //when
         trialCounter.increment();
-        assertEquals(trialCounter.getTrials(), 1);
 
-        trialCounter.increment();
-        assertEquals(trialCounter.getTrials(), 2);
+        //then
+        assertThat(trialCounter.getTrials()).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("trials가 6회 미만이고 keepTrying 이면 true 를 반환한다.")
-    void keepTryingIsTrue() {
-        TrialCounter trialCounter = new TrialCounter();
-        trialCounter.increment();
-        trialCounter.increment();
+    @DisplayName("trials가 6이면 keepTrying은 false다")
+    void keepTryingIsFalseAtLimit() {
+        //given
+        TrialCounter counter = TrialCounter.withTrials(6);
 
-        assertTrue(trialCounter.keepTrying());
+        //when
+        boolean result = counter.keepTrying();
+
+        //then
+        assertThat(result).isFalse();
     }
 
     @Test
-    @DisplayName("trials가 6회를 초과하면 false 를 반환한다.")
-    void keepTryingIsFalse() {
-        TrialCounter trialCounter = new TrialCounter();
-        for (int i = 0; i < 7; i++) {
-            trialCounter.increment();
-        }
-        assertFalse(trialCounter.keepTrying());
+    @DisplayName("trials가 5이면 keepTrying은 true다")
+    void keepTryingIsTrueWhenTrialsUnderLimit() {
+        //given
+        TrialCounter counter = TrialCounter.withTrials(5);
+
+        //when
+        boolean result = counter.keepTrying();
+
+        //then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    @DisplayName("trials가 6회를 초과하면 keepTrying은 false다")
+    void keepTryingIsFalseWhenTrialsExceeded() {
+        //given
+        TrialCounter counter = TrialCounter.withTrials(7);
+
+        //when
+        boolean result = counter.keepTrying();
+
+        //then
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    @DisplayName("gameOver이면 trials가 남아있어도 keepTrying은 false다")
+    void keepTryingIsFalseWhenGameOver() {
+        //given
+        TrialCounter counter = TrialCounter.withTrials(0);
+        counter.gameOver();
+
+        //when
+        boolean result = counter.keepTrying();
+
+        //then
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    @DisplayName("gameOver를 호출하면 게임 종료 상태가 된다")
+    void gameOverSetsFlag() {
+        //given
+        TrialCounter counter = new TrialCounter();
+
+        //when
+        counter.gameOver();
+
+        //then
+        assertThat(counter.isGameOver()).isTrue();
+    }
+
+    @Test
+    @DisplayName("withTrials로 생성하면 trials가 설정된다")
+    void withTrialsFactory() {
+        //given & when
+        TrialCounter counter = TrialCounter.withTrials(3);
+
+        //then
+        assertThat(counter.getTrials()).isEqualTo(3);
     }
 }

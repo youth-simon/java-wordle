@@ -4,6 +4,15 @@ public class TrialCounter {
     private int trials = 0;
     private boolean gameOver = false;
 
+    public TrialCounter() {
+    }
+
+    public static TrialCounter withTrials(int trials) {
+        TrialCounter counter = new TrialCounter();
+        counter.trials = trials;
+        return counter;
+    }
+
     public void increment() {
         trials++;
     }
