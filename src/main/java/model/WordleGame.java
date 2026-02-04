@@ -5,6 +5,9 @@ import view.FileReader;
 import view.WordDrawer;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.time.Clock;
 
 public class WordleGame {
 
@@ -12,19 +15,26 @@ public class WordleGame {
     private final TrialCounter trialCounter;
     private final WordComparator comparator;
     private final WordDrawer drawer;
-    private final String todayWord;
+    private final WordIndexCalculator calculator;
+    private String todayWord;
+    private final List<String> words;
 
     public WordleGame() throws IOException {
-        FileReader fileReader = new FileReader();
-        this.todayWord = fileReader.read("./words.txt");
+        words = FileReader.readAllLines("./words.txt");
 
         inputHandler = new WordInputHandler();
         trialCounter = new TrialCounter();
         comparator = new WordComparator();
         drawer = new WordDrawer();
+        calculator = new WordIndexCalculator(words.size()
+                , LocalDateTime.of(2021, 6, 19, 0, 0)
+                , Clock.systemDefaultZone());
     }
 
     public void start() {
+        WordSelector wordSelector = new WordSelector(calculator, words);
+        todayWord = wordSelector.getTodayWord();
+
         while (trialCounter.keepTrying()) {
             playTurn();
         }

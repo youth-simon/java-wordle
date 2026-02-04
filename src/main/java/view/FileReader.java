@@ -5,34 +5,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class FileReader {
+public final class FileReader {
 
-    public static final int WORDBOOK_SIZE = 2309;
+    private FileReader() {
 
-    public String read(String resourceName) {
-        InputStream is = getClass()
+    }
+
+    public static List<String> readAllLines(String resourceName) {
+        InputStream is = FileReader.class
                 .getClassLoader()
                 .getResourceAsStream(resourceName);
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+            return br.lines().collect(Collectors.toList());
 
-            long counter = 1L;
-            long todayIndex = getTodayWordIndex();
-
-            while (counter != todayIndex) {
-                br.readLine();
-                counter++;
-            }
-            return br.readLine();
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
-    }
-
-    private long getTodayWordIndex() {
-        return ChronoUnit.DAYS.between(LocalDateTime.of(2021, 6, 19, 0, 0), LocalDateTime.now()) % WORDBOOK_SIZE;
     }
 }
