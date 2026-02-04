@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class WordComparator {
 
-    public List<Integer> getPerfectMatchedIndex(String inputWord, String todayWord) {
+    private List<Integer> getPerfectMatchedIndex(String inputWord, String todayWord) {
 
         List<Integer> list = new ArrayList<>();
 
@@ -20,7 +20,7 @@ public class WordComparator {
         return list;
     }
 
-    public List<Integer> getPartialMatchedIndex(String inputWord, String todayWord) {
+    private List<Integer> getPartialMatchedIndex(String inputWord, String todayWord) {
 
         Map<Character, Integer> todayWordMap = new HashMap<>();
         List<Integer> list = new ArrayList<>();
@@ -43,6 +43,12 @@ public class WordComparator {
         }
 
         return list;
+    }
+
+    public WordResult compare(String input, String answer) {
+        List<Integer> partial = getPartialMatchedIndex(input, answer);
+        List<Integer> perfect = getPerfectMatchedIndex(input, answer);
+        return new WordResult(answer.length(), partial, perfect);
     }
 
     private void clearMap(Map<Character, Integer> todayWordMap, char key) {
