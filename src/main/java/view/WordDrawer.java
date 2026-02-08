@@ -24,11 +24,11 @@ public class WordDrawer {
         System.out.println(sb);
     }
 
-    public static void showTheEnd(boolean gameOver) {
-        if (gameOver) {
-            System.out.println("You won: The End");
+    public static void showTheEnd(boolean solved) {
+        if (solved) {
+            System.out.println("축하합니다! 정답을 맞추셨습니다.");
             return;
         }
-        System.out.println("You lost: The End");
+        System.out.println("실패! 게임이 종료됩니다.");
     }
 }
