@@ -23,7 +23,8 @@ public class WordleGame {
         words = FileReader.readAllLines("./words.txt");
 
         inputHandler = new WordInputHandler();
-        trialCounter = new TrialCounter();
+        trialCounter = new TrialCounter(6);
+
         comparator = new WordComparator();
         drawer = new WordDrawer();
         calculator = new WordIndexCalculator(words.size()
@@ -38,18 +39,20 @@ public class WordleGame {
         while (trialCounter.keepTrying()) {
             playTurn();
         }
-        WordDrawer.showTheEnd(trialCounter.isGameOver());
+        WordDrawer.showTheEnd(trialCounter.isSolved());
     }
 
     private void playTurn() {
-        System.out.println("정답을 입력해 주세요.");
+
+        System.out.println("정답을 입력해 주세요. " + trialCounter.getTrials() + " / " + trialCounter.getMaxTrials());
+
         String input = inputHandler.inputWord();
         trialCounter.increment();
 
         WordResult result = comparator.compare(input, todayWord);
 
         if (result.isPerfect()) {
-            trialCounter.gameOver();
+            trialCounter.solveTheAnswer();
         }
 
         drawer.addResult(result);
