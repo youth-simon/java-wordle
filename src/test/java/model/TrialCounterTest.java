@@ -9,13 +9,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 class TrialCounterTest {
 
     @Nested
-    @DisplayName("increment 관련 테스트")
+    @DisplayName("increment 호출 시")
     class IncrementTest {
         @Test
-        @DisplayName("increment를 한 번 호출하면 trials는 1이다")
+        @DisplayName("한 번 호출하면 trials는 1이다")
         void incrementOnce() {
             //given
-            final TrialCounter trialCounter = new TrialCounter();
+            final TrialCounter trialCounter = new TrialCounter(6);
 
             //when
             trialCounter.increment();
@@ -26,7 +26,7 @@ class TrialCounterTest {
     }
 
     @Nested
-    @DisplayName("keepTrying 관련 테스트")
+    @DisplayName("keepTrying 값은")
     class KeppTryingTests {
         @Test
         @DisplayName("trials가 6이면 keepTrying은 false다")
@@ -69,14 +69,14 @@ class TrialCounterTest {
     }
 
     @Nested
-    @DisplayName("gameOver 관련 테스트")
+    @DisplayName("solveTheAnswer를 호출하면")
     class GameOverTests {
         @Test
-        @DisplayName("gameOver이면 trials가 남아있어도 keepTrying은 false다")
-        void keepTryingIsFalseWhenGameOver() {
+        @DisplayName("trials가 남아있어도 keepTrying은 false다")
+        void keepTryingIsFalseWhenSolvetheAnswer() {
             //given
             TrialCounter counter = TrialCounter.withTrials(0);
-            counter.gameOver();
+            counter.solveTheAnswer();
 
             //when
             boolean result = counter.keepTrying();
@@ -86,24 +86,24 @@ class TrialCounterTest {
         }
 
         @Test
-        @DisplayName("gameOver를 호출하면 게임 종료 상태가 된다")
-        void gameOverSetsFlag() {
+        @DisplayName("solved 값이 true가 된다")
+        void solveTheAnswerSetsFlag() {
             //given
-            TrialCounter counter = new TrialCounter();
+            TrialCounter counter = new TrialCounter(6);
 
             //when
-            counter.gameOver();
+            counter.solveTheAnswer();
 
             //then
-            assertThat(counter.isGameOver()).isTrue();
+            assertThat(counter.isSolved()).isTrue();
         }
     }
 
     @Nested
-    @DisplayName("withTrials 관련 테스트")
+    @DisplayName("withTrials로 TrialCounter를 생성하면")
     class WithTrialsTests {
         @Test
-        @DisplayName("withTrials로 생성하면 trials가 설정된다")
+        @DisplayName("trials가 설정된다")
         void withTrialsFactory() {
             //given & when
             TrialCounter counter = TrialCounter.withTrials(3);
