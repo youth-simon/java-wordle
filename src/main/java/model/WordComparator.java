@@ -7,53 +7,64 @@ import java.util.Map;
 
 public class WordComparator {
 
-    private List<Integer> getPerfectMatchedIndex(String inputWord, String todayWord) {
-
-        List<Integer> list = new ArrayList<>();
-
-        for (int i = 0; i < inputWord.length(); i++) {
-            if (inputWord.charAt(i) == todayWord.charAt(i)) {
-                list.add(i);
-            }
-        }
-
-        return list;
-    }
-
-    private List<Integer> getPartialMatchedIndex(String inputWord, String todayWord) {
-
-        Map<Character, Integer> todayWordMap = new HashMap<>();
-        List<Integer> list = new ArrayList<>();
-
-        for (char c : todayWord.toCharArray()) {
-            todayWordMap.put(c, todayWordMap.getOrDefault(c, 0) + 1);
-        }
-
-        List<Integer> perfectMatchedIndexes = getPerfectMatchedIndex(inputWord, todayWord);
-
-        for (int i = 0; i < inputWord.length(); i++) {
-            if (perfectMatchedIndexes.contains(i)) continue;
-
-            if (todayWordMap.containsKey(inputWord.charAt(i))) {
-                list.add(i);
-                todayWordMap.put(inputWord.charAt(i), todayWordMap.get(inputWord.charAt(i)) - 1);
-
-                clearMap(todayWordMap, inputWord.charAt(i));
-            }
-        }
-
-        return list;
-    }
-
     public WordResult compare(String input, String answer) {
-        List<Integer> partial = getPartialMatchedIndex(input, answer);
-        List<Integer> perfect = getPerfectMatchedIndex(input, answer);
-        return new WordResult(answer.length(), partial, perfect);
+
+        Map<Character, Integer> answerCharCountMap = createWordCharCountMap(answer);
+
+        boolean[] isPerfectMatched = new boolean[input.length()];
+        List<Integer> perfectIndexes = getPerfectMatchedIndexes(input, answer, answerCharCountMap, isPerfectMatched);
+        List<Integer> partialIndexes = getPartialMatchedIndexes(input, answerCharCountMap, isPerfectMatched);
+
+        return new WordResult(answer.length(), partialIndexes, perfectIndexes);
     }
 
-    private void clearMap(Map<Character, Integer> todayWordMap, char key) {
-        if (todayWordMap.get(key) == 0) {
-            todayWordMap.remove(key);
+    private Map<Character, Integer> createWordCharCountMap(String answer) {
+
+        Map<Character, Integer> answerCharCountMap = new HashMap<>();
+
+        for (char c : answer.toCharArray()) {
+            answerCharCountMap.put(c, answerCharCountMap.getOrDefault(c, 0) + 1);
+        }
+
+        return answerCharCountMap;
+    }
+
+    private List<Integer> getPerfectMatchedIndexes(String inputWord, String answer, Map<Character, Integer> answerCharCountMap, boolean[] isPerfectMatched) {
+
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < inputWord.length(); i++) {
+            if (inputWord.charAt(i) == answer.charAt(i)) {
+                list.add(i);
+                isPerfectMatched[i] = true;
+                answerCharCountMap.put(inputWord.charAt(i), answerCharCountMap.get(inputWord.charAt(i)) - 1);
+                removeIfZeroCount(answerCharCountMap, inputWord.charAt(i));
+            }
+        }
+
+        return list;
+    }
+
+    private List<Integer> getPartialMatchedIndexes(String inputWord, Map<Character, Integer> answerCharCountMap, boolean[] isPerfectMatched) {
+
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < inputWord.length(); i++) {
+            if (isPerfectMatched[i]) continue;
+
+            if (answerCharCountMap.containsKey(inputWord.charAt(i))) {
+                list.add(i);
+                answerCharCountMap.put(inputWord.charAt(i), answerCharCountMap.get(inputWord.charAt(i)) - 1);
+                removeIfZeroCount(answerCharCountMap, inputWord.charAt(i));
+            }
+        }
+
+        return list;
+    }
+
+    private void removeIfZeroCount(Map<Character, Integer> answerCharCountMap, char key) {
+        if (answerCharCountMap.get(key) == 0) {
+            answerCharCountMap.remove(key);
         }
     }
 }
