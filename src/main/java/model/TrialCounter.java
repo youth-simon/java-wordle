@@ -9,7 +9,7 @@ public class TrialCounter {
         this.maxTrials = maxTrials;
     }
 
-    public static TrialCounter withTrials(int trials) {
+    public static TrialCounter withTrials(final int trials) {
         TrialCounter counter = new TrialCounter(6);
         counter.trials = trials;
         return counter;
