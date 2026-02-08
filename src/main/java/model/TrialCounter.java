@@ -2,13 +2,15 @@ package model;
 
 public class TrialCounter {
     private int trials = 0;
-    private boolean gameOver = false;
+    private final int maxTrials;
+    private boolean solved = false;
 
-    public TrialCounter() {
+    public TrialCounter(int maxTrials) {
+        this.maxTrials = maxTrials;
     }
 
     public static TrialCounter withTrials(int trials) {
-        TrialCounter counter = new TrialCounter();
+        TrialCounter counter = new TrialCounter(6);
         counter.trials = trials;
         return counter;
     }
@@ -18,18 +20,22 @@ public class TrialCounter {
     }
 
     public boolean keepTrying() {
-        return trials < 6 && !gameOver;
+        return !solved  && trials < maxTrials;
     }
 
     public int getTrials() {
         return trials;
     }
 
-    public void gameOver() {
-        gameOver = true;
+    public int getMaxTrials() {
+        return maxTrials;
     }
 
-    public boolean isGameOver() {
-        return gameOver;
+    public void solveTheAnswer() {
+        solved = true;
+    }
+
+    public boolean isSolved() {
+        return solved;
     }
 }
